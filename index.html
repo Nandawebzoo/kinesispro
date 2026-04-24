@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KinesisPro — Sports Therapy</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,700;1,9..40,400&amp;family=Outfit:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cobalt: '#0047AB',
+            charcoal: '#2B2B2B',
+            smoke: '#F7F7F7',
+            ice: '#E8EFF8'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    * { box-sizing: border-box; }
+    .font-heading { font-family: 'Outfit', sans-serif; }
+    .font-body { font-family: 'DM Sans', sans-serif; }
+
+    /* Swiss grid lines */
+    .grid-line { position: absolute; background: rgba(0,71,171,0.06); }
+    .grid-line-v { width: 1px; height: 100%; top: 0; }
+    .grid-line-h { height: 1px; width: 100%; left: 0; }
+
+    /* Cryo vapor animation */
+    @keyframes vapor {
+      0% { transform: translateY(0) scale(1); opacity: 0.7; }
+      50% { transform: translateY(-30px) scale(1.4); opacity: 0.3; }
+      100% { transform: translateY(-60px) scale(1.8); opacity: 0; }
+    }
+    @keyframes vaporSlow {
+      0% { transform: translateY(0) scale(0.8); opacity: 0.5; }
+      60% { transform: translateY(-40px) scale(1.2); opacity: 0.2; }
+      100% { transform: translateY(-70px) scale(1.6); opacity: 0; }
+    }
+    .vapor-particle {
+      animation: vapor 3s ease-out infinite;
+    }
+    .vapor-particle-slow {
+      animation: vaporSlow 4s ease-out infinite;
+    }
+
+    /* Staggered reveal */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; animation: fadeUp 0.7s ease-out forwards; }
+    .reveal-d1 { animation-delay: 0.1s; }
+    .reveal-d2 { animation-delay: 0.2s; }
+    .reveal-d3 { animation-delay: 0.3s; }
+    .reveal-d4 { animation-delay: 0.4s; }
+    .reveal-d5 { animation-delay: 0.5s; }
+    .reveal-d6 { animation-delay: 0.6s; }
+
+    /* Shockwave pulse */
+    @keyframes pulse-ring {
+      0% { transform: scale(0.8); opacity: 0.8; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* Infrared glow */
+    @keyframes infraGlow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.9; }
+    }
+
+    /* Ultrasound wave */
+    @keyframes ultraWave {
+      0% { transform: scaleX(0); opacity: 1; }
+      100% { transform: scaleX(1); opacity: 0; }
+    }
+
+    .cta-btn {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,71,171,0.3);
+    }
+
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body bg-white text-charcoal overflow-auto">
+  <div id="app-wrapper" class="w-full min-h-full"><!-- NAV -->
+   <nav class="w-full border-b border-gray-100 sticky top-0 bg-white/90 backdrop-blur-md z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+     <div class="font-heading font-900 text-xl tracking-tight"><span id="nav-logo" style="color:#0047AB;">KINESIS</span><span style="color:#2B2B2B;">PRO</span>
+     </div>
+     <div class="hidden md:flex items-center gap-8 text-sm font-medium" style="color:#2B2B2B;"><a href="#services" class="hover:opacity-60 transition-opacity">Services</a> <a href="#technology" class="hover:opacity-60 transition-opacity">Technology</a> <a href="#packages" class="hover:opacity-60 transition-opacity">Packages</a> <a href="#cryo" class="hover:opacity-60 transition-opacity">Cryotherapy</a>
+     </div><button id="nav-cta" class="cta-btn text-white text-sm font-heading font-700 px-5 py-2.5 rounded-sm" style="background:#0047AB;"> Book Now </button>
+    </div>
+   </nav><!-- HERO -->
+   <header class="relative w-full overflow-hidden" style="background:#FFFFFF;"><!-- Grid decoration -->
+    <div class="absolute inset-0 pointer-events-none">
+     <div class="grid-line grid-line-v" style="left:8.33%;"></div>
+     <div class="grid-line grid-line-v" style="left:25%;"></div>
+     <div class="grid-line grid-line-v" style="left:50%;"></div>
+     <div class="grid-line grid-line-v" style="left:75%;"></div>
+     <div class="grid-line grid-line-v" style="left:91.66%;"></div>
+     <div class="grid-line grid-line-h" style="top:33%;"></div>
+     <div class="grid-line grid-line-h" style="top:66%;"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 py-24 md:py-36 relative z-10">
+     <div class="max-w-3xl">
+      <p class="reveal reveal-d1 font-heading text-xs font-700 tracking-[0.3em] uppercase mb-6" style="color:#0047AB;">Sports Therapy Clinic — Est. 2024</p>
+      <h1 id="hero-title" class="reveal reveal-d2 font-heading font-900 text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight mb-8" style="color:#2B2B2B;">Recover Faster,<br>
+       Perform Better</h1>
+      <p id="hero-subtitle" class="reveal reveal-d3 text-lg md:text-xl leading-relaxed max-w-xl mb-10" style="color:#2B2B2B; opacity:0.6;">Evidence-based sports therapy combining manual expertise with cutting-edge technology for elite recovery.</p>
+      <div class="reveal reveal-d4 flex items-center gap-4"><button id="hero-cta" class="cta-btn text-white font-heading font-700 text-sm px-8 py-4 rounded-sm flex items-center gap-2" style="background:#0047AB;"> <span>Book Now</span> <i data-lucide="arrow-right" style="width:16px;height:16px;"></i> </button> <span class="text-xs tracking-wider uppercase opacity-40">Free Consultation</span>
+      </div>
+     </div><!-- Geometric accent -->
+     <div class="absolute right-6 md:right-16 top-1/2 -translate-y-1/2 hidden lg:block">
+      <svg width="280" height="280" viewbox="0 0 280 280" fill="none"><rect x="40" y="0" width="200" height="200" stroke="#0047AB" stroke-width="1" opacity="0.15" transform="rotate(12 140 100)" /> <rect x="70" y="30" width="140" height="140" stroke="#0047AB" stroke-width="1" opacity="0.25" transform="rotate(6 140 100)" /> <circle cx="140" cy="140" r="4" fill="#0047AB" opacity="0.8" /> <line x1="136" y1="140" x2="0" y2="140" stroke="#0047AB" stroke-width="0.5" opacity="0.15" /> <line x1="140" y1="136" x2="140" y2="0" stroke="#0047AB" stroke-width="0.5" opacity="0.15" />
+      </svg>
+     </div>
+    </div><!-- Bottom metric bar -->
+    <div class="w-full border-t border-gray-100" style="background:#F7F7F7;">
+     <div class="max-w-7xl mx-auto px-6 py-5 grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="reveal reveal-d2">
+       <span class="font-heading font-900 text-2xl" style="color:#0047AB;">12+</span>
+       <p class="text-xs mt-1 opacity-50">Years Experience</p>
+      </div>
+      <div class="reveal reveal-d3">
+       <span class="font-heading font-900 text-2xl" style="color:#0047AB;">5,000+</span>
+       <p class="text-xs mt-1 opacity-50">Athletes Treated</p>
+      </div>
+      <div class="reveal reveal-d4">
+       <span class="font-heading font-900 text-2xl" style="color:#0047AB;">98%</span>
+       <p class="text-xs mt-1 opacity-50">Recovery Rate</p>
+      </div>
+      <div class="reveal reveal-d5">
+       <span class="font-heading font-900 text-2xl" style="color:#0047AB;">24h</span>
+       <p class="text-xs mt-1 opacity-50">Response Time</p>
+      </div>
+     </div>
+    </div>
+   </header><!-- MANUAL SERVICES -->
+   <section id="services" class="w-full py-20 md:py-28" style="background:#FFFFFF;">
+    <div class="max-w-7xl mx-auto px-6">
+     <div class="flex items-center gap-4 mb-4">
+      <div class="w-8 h-px" style="background:#0047AB;"></div><span class="font-heading text-xs font-700 tracking-[0.3em] uppercase" style="color:#0047AB;">01</span>
+     </div>
+     <h2 id="services-title" class="font-heading font-900 text-4xl md:text-5xl tracking-tight mb-16" style="color:#2B2B2B;">Manual Therapy</h2>
+     <div class="grid md:grid-cols-2 gap-6"><!-- Sport Massage -->
+      <div class="card-hover border border-gray-100 rounded-sm p-8 md:p-10 relative overflow-hidden" style="background:#FFFFFF;">
+       <div class="absolute top-0 left-0 w-full h-1" style="background:#0047AB;"></div>
+       <div class="flex items-start justify-between mb-6">
+        <div class="w-14 h-14 rounded-sm flex items-center justify-center" style="background:#E8EFF8;">
+         <svg width="28" height="28" viewbox="0 0 28 28" fill="none"><path d="M7 14C7 14 10 8 14 8C18 8 21 14 21 14C21 14 18 20 14 20C10 20 7 14 7 14Z" stroke="#0047AB" stroke-width="1.5" fill="none" /> <circle cx="14" cy="14" r="2" fill="#0047AB" /> <path d="M4 7L8 11M24 7L20 11M4 21L8 17M24 21L20 17" stroke="#0047AB" stroke-width="1" opacity="0.3" />
+         </svg>
+        </div><span class="font-heading font-700 text-xs tracking-wider opacity-30">SM—01</span>
+       </div>
+       <h3 class="font-heading font-800 text-2xl mb-3" style="color:#2B2B2B;">Sport Massage</h3>
+       <p class="text-sm leading-relaxed opacity-60 mb-6">Deep tissue manipulation targeting muscle adhesions, trigger points, and fascial restrictions. Optimized for pre and post-competition recovery.</p>
+       <div class="flex items-center gap-6 text-xs opacity-40"><span class="flex items-center gap-1"><i data-lucide="clock" style="width:12px;height:12px;"></i> 60–90 min</span> <span class="flex items-center gap-1"><i data-lucide="zap" style="width:12px;height:12px;"></i> Deep Tissue</span>
+       </div>
+      </div><!-- Dry Needling -->
+      <div class="card-hover border border-gray-100 rounded-sm p-8 md:p-10 relative overflow-hidden" style="background:#FFFFFF;">
+       <div class="absolute top-0 left-0 w-full h-1" style="background:#2B2B2B;"></div>
+       <div class="flex items-start justify-between mb-6">
+        <div class="w-14 h-14 rounded-sm flex items-center justify-center" style="background:#F0F0F0;">
+         <svg width="28" height="28" viewbox="0 0 28 28" fill="none"><line x1="14" y1="4" x2="14" y2="24" stroke="#2B2B2B" stroke-width="1.5" /> <circle cx="14" cy="4" r="1.5" fill="#2B2B2B" /> <circle cx="14" cy="12" r="3" stroke="#0047AB" stroke-width="1" fill="none" opacity="0.4" /> <circle cx="14" cy="12" r="6" stroke="#0047AB" stroke-width="0.5" fill="none" opacity="0.2" />
+         </svg>
+        </div><span class="font-heading font-700 text-xs tracking-wider opacity-30">DN—02</span>
+       </div>
+       <h3 class="font-heading font-800 text-2xl mb-3" style="color:#2B2B2B;">Dry Needling</h3>
+       <p class="text-sm leading-relaxed opacity-60 mb-6">Precision myofascial trigger point therapy using sterile filiform needles. Targets neuromuscular dysfunction and chronic pain patterns.</p>
+       <div class="flex items-center gap-6 text-xs opacity-40"><span class="flex items-center gap-1"><i data-lucide="clock" style="width:12px;height:12px;"></i> 30–45 min</span> <span class="flex items-center gap-1"><i data-lucide="target" style="width:12px;height:12px;"></i> Trigger Points</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- ADVANCED TECHNOLOGY -->
+   <section id="technology" class="w-full py-20 md:py-28" style="background:#F7F7F7;">
+    <div class="max-w-7xl mx-auto px-6">
+     <div class="flex items-center gap-4 mb-4">
+      <div class="w-8 h-px" style="background:#0047AB;"></div><span class="font-heading text-xs font-700 tracking-[0.3em] uppercase" style="color:#0047AB;">02</span>
+     </div>
+     <h2 id="tech-title" class="font-heading font-900 text-4xl md:text-5xl tracking-tight mb-16" style="color:#2B2B2B;">Advanced Technology</h2>
+     <div class="grid md:grid-cols-3 gap-6"><!-- Shockwave -->
+      <div class="card-hover border border-gray-100 rounded-sm overflow-hidden" style="background:#FFFFFF;">
+       <div class="relative h-52 flex items-center justify-center overflow-hidden" style="background:#0047AB;">
+        <svg width="120" height="120" viewbox="0 0 120 120" fill="none" class="relative z-10"><circle cx="60" cy="60" r="8" fill="white" opacity="0.9" /> <circle cx="60" cy="60" r="20" stroke="white" stroke-width="1" opacity="0.5">
+          <animate attributename="r" values="20;40" dur="1.5s" repeatcount="indefinite" />
+          <animate attributename="opacity" values="0.5;0" dur="1.5s" repeatcount="indefinite" />
+         </circle> <circle cx="60" cy="60" r="20" stroke="white" stroke-width="1" opacity="0.3">
+          <animate attributename="r" values="20;50" dur="1.5s" begin="0.4s" repeatcount="indefinite" />
+          <animate attributename="opacity" values="0.3;0" dur="1.5s" begin="0.4s" repeatcount="indefinite" />
+         </circle> <circle cx="60" cy="60" r="20" stroke="white" stroke-width="0.5" opacity="0.2">
+          <animate attributename="r" values="20;55" dur="1.5s" begin="0.8s" repeatcount="indefinite" />
+          <animate attributename="opacity" values="0.2;0" dur="1.5s" begin="0.8s" repeatcount="indefinite" />
+         </circle>
+        </svg>
+       </div>
+       <div class="p-6">
+        <h3 class="font-heading font-800 text-lg mb-2" style="color:#2B2B2B;">Shockwave Therapy</h3>
+        <p class="text-sm opacity-60 leading-relaxed">Acoustic wave technology for tendinopathy, calcifications, and chronic soft tissue conditions.</p>
+       </div>
+      </div><!-- Ultrasound -->
+      <div class="card-hover border border-gray-100 rounded-sm overflow-hidden" style="background:#FFFFFF;">
+       <div class="relative h-52 flex items-center justify-center overflow-hidden" style="background:#2B2B2B;">
+        <svg width="120" height="120" viewbox="0 0 120 120" fill="none" class="relative z-10"><rect x="48" y="35" width="24" height="50" rx="12" fill="white" opacity="0.2" /> <rect x="52" y="40" width="16" height="40" rx="8" fill="white" opacity="0.15" /> <!-- Ultrasound waves --> <g opacity="0.6">
+          <rect x="75" y="50" width="30" height="1" rx="0.5" fill="#0047AB">
+           <animate attributename="width" values="0;30" dur="1.2s" repeatcount="indefinite" />
+           <animate attributename="opacity" values="0.8;0" dur="1.2s" repeatcount="indefinite" />
+          </rect>
+          <rect x="75" y="55" width="25" height="1" rx="0.5" fill="#0047AB">
+           <animate attributename="width" values="0;25" dur="1.2s" begin="0.2s" repeatcount="indefinite" />
+           <animate attributename="opacity" values="0.6;0" dur="1.2s" begin="0.2s" repeatcount="indefinite" />
+          </rect>
+          <rect x="75" y="60" width="35" height="1" rx="0.5" fill="#0047AB">
+           <animate attributename="width" values="0;35" dur="1.2s" begin="0.4s" repeatcount="indefinite" />
+           <animate attributename="opacity" values="0.7;0" dur="1.2s" begin="0.4s" repeatcount="indefinite" />
+          </rect>
+          <rect x="75" y="65" width="20" height="1" rx="0.5" fill="#0047AB">
+           <animate attributename="width" values="0;20" dur="1.2s" begin="0.6s" repeatcount="indefinite" />
+           <animate attributename="opacity" values="0.5;0" dur="1.2s" begin="0.6s" repeatcount="indefinite" />
+          </rect>
+         </g>
+        </svg>
+       </div>
+       <div class="p-6">
+        <h3 class="font-heading font-800 text-lg mb-2" style="color:#2B2B2B;">Ultrasound Therapy</h3>
+        <p class="text-sm opacity-60 leading-relaxed">Therapeutic ultrasound for deep tissue heating, enhanced blood flow, and accelerated cellular repair.</p>
+       </div>
+      </div><!-- Infrared -->
+      <div class="card-hover border border-gray-100 rounded-sm overflow-hidden" style="background:#FFFFFF;">
+       <div class="relative h-52 flex items-center justify-center overflow-hidden" style="background:#1a1a1a;">
+        <svg width="120" height="120" viewbox="0 0 120 120" fill="none" class="relative z-10"><!-- Lamp body --> <rect x="50" y="20" width="20" height="8" rx="2" fill="white" opacity="0.15" /> <line x1="60" y1="28" x2="60" y2="45" stroke="white" stroke-width="1.5" opacity="0.2" /> <ellipse cx="60" cy="48" rx="16" ry="6" fill="white" opacity="0.1" /> <!-- Infrared glow --> <ellipse cx="60" cy="75" rx="30" ry="20" fill="#FF3B00" opacity="0.08">
+          <animate attributename="opacity" values="0.05;0.15;0.05" dur="2s" repeatcount="indefinite" />
+         </ellipse> <ellipse cx="60" cy="75" rx="20" ry="14" fill="#FF3B00" opacity="0.12">
+          <animate attributename="opacity" values="0.08;0.2;0.08" dur="2s" repeatcount="indefinite" begin="0.3s" />
+         </ellipse> <ellipse cx="60" cy="70" rx="10" ry="8" fill="#FF6B35" opacity="0.2">
+          <animate attributename="opacity" values="0.15;0.35;0.15" dur="1.5s" repeatcount="indefinite" />
+         </ellipse> <!-- Light rays --> <line x1="60" y1="52" x2="40" y2="90" stroke="#FF3B00" stroke-width="0.5" opacity="0.2" /> <line x1="60" y1="52" x2="60" y2="95" stroke="#FF3B00" stroke-width="0.5" opacity="0.25" /> <line x1="60" y1="52" x2="80" y2="90" stroke="#FF3B00" stroke-width="0.5" opacity="0.2" />
+        </svg>
+       </div>
+       <div class="p-6">
+        <h3 class="font-heading font-800 text-lg mb-2" style="color:#2B2B2B;">Infrared Therapy</h3>
+        <p class="text-sm opacity-60 leading-relaxed">Near-infrared heat lamp technology for deep tissue penetration, pain relief, and cellular regeneration.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- RECOVERY PACKAGES -->
+   <section id="packages" class="w-full py-20 md:py-28" style="background:#FFFFFF;">
+    <div class="max-w-7xl mx-auto px-6">
+     <div class="flex items-center gap-4 mb-4">
+      <div class="w-8 h-px" style="background:#0047AB;"></div><span class="font-heading text-xs font-700 tracking-[0.3em] uppercase" style="color:#0047AB;">03</span>
+     </div>
+     <h2 id="packages-title" class="font-heading font-900 text-4xl md:text-5xl tracking-tight mb-16" style="color:#2B2B2B;">Recovery Packages</h2>
+     <div class="grid md:grid-cols-3 gap-6"><!-- Essential -->
+      <div class="card-hover border border-gray-200 rounded-sm p-8 relative" style="background:#FFFFFF;"><span class="font-heading text-xs font-700 tracking-[0.2em] uppercase opacity-30">Essential</span>
+       <h3 class="font-heading font-900 text-3xl mt-3 mb-1" style="color:#2B2B2B;">Rp 450K</h3>
+       <p class="text-xs opacity-40 mb-6">per session</p>
+       <div class="w-full h-px bg-gray-100 mb-6"></div>
+       <ul class="space-y-3 text-sm mb-8">
+        <li class="flex items-center gap-2 opacity-70"><i data-lucide="check" style="width:14px;height:14px;color:#0047AB;"></i> Sport Massage (60 min)</li>
+        <li class="flex items-center gap-2 opacity-70"><i data-lucide="check" style="width:14px;height:14px;color:#0047AB;"></i> Recovery assessment</li>
+        <li class="flex items-center gap-2 opacity-70"><i data-lucide="check" style="width:14px;height:14px;color:#0047AB;"></i> Home exercise plan</li>
+        <li class="flex items-center gap-2 opacity-30"><i data-lucide="minus" style="width:14px;height:14px;"></i> Technology therapy</li>
+        <li class="flex items-center gap-2 opacity-30"><i data-lucide="minus" style="width:14px;height:14px;"></i> Cryotherapy access</li>
+       </ul><button class="w-full py-3 border rounded-sm font-heading font-700 text-sm transition-all hover:bg-gray-50" style="border-color:#2B2B2B;color:#2B2B2B;">Select Plan</button>
+      </div><!-- Chronic Pain — Featured -->
+      <div class="card-hover border-2 rounded-sm p-8 relative" style="border-color:#0047AB;background:#FFFFFF;">
+       <div class="absolute -top-3 left-8 px-3 py-1 text-xs font-heading font-700 tracking-wider text-white rounded-sm" style="background:#0047AB;">
+        POPULAR
+       </div><span class="font-heading text-xs font-700 tracking-[0.2em] uppercase" style="color:#0047AB;">Chronic Pain</span>
+       <h3 class="font-heading font-900 text-3xl mt-3 mb-1" style="color:#2B2B2B;">Rp 850K</h3>
+       <p class="text-xs opacity-40 mb-6">per session</p>
+       <div class="w-full h-px mb-6" style="background:#E8EFF8;"></div>
+       <ul class="space-y-3 text-sm mb-8">
+        <li class="flex items-center gap-2 opacity-70"><i data-lucide="check" style="width:14px;height:14px;color:#0047AB;"></i> Sport Massage (90 min)</li>
+        <li class="flex items-center gap-2 opacity-70"><i data-lucide="check" style="width:14px;height:14px;color:#0047AB;"></i> Dry Needling session</li>
+        <li class="flex items-center gap-2 opacity-70"><i data-lucide="check" style="width:14px;height:14px;color:#0047AB;"></i> Shockwave Therapy</li>
+        <li class="flex items-center gap-2 opacity-70"><i data-lucide="check" style="width:14px;height:14px;color:#0047AB;"></i> Infrared treatment</li>
+        <li class="flex items-center gap-2 opacity-30"><i data-lucide="minus" style="width:14px;height:14px;"></i> Cryotherapy access</li>
+       </ul><button class="cta-btn w-full py-3 rounded-sm font-heading font-700 text-sm text-white" style="background:#0047AB;">Select Plan</button>
+      </div><!-- Athlete Performance -->
+      <div class="card-hover border border-gray-200 rounded-sm p-8 relative" style="background:#2B2B2B;"><span class="font-heading text-xs font-700 tracking-[0.2em] uppercase" style="color:#0047AB;">Athlete Pro</span>
+       <h3 class="font-heading font-900 text-3xl mt-3 mb-1 text-white">Rp 1.5M</h3>
+       <p class="text-xs text-white opacity-40 mb-6">per session</p>
+       <div class="w-full h-px bg-white/10 mb-6"></div>
+       <ul class="space-y-3 text-sm mb-8 text-white">
+        <li class="flex items-center gap-2 opacity-70"><i data-lucide="check" style="width:14px;height:14px;color:#0047AB;"></i> All manual therapies</li>
+        <li class="flex items-center gap-2 opacity-70"><i data-lucide="check" style="width:14px;height:14px;color:#0047AB;"></i> All technology treatments</li>
+        <li class="flex items-center gap-2 opacity-70"><i data-lucide="check" style="width:14px;height:14px;color:#0047AB;"></i> Cryotherapy session</li>
+        <li class="flex items-center gap-2 opacity-70"><i data-lucide="check" style="width:14px;height:14px;color:#0047AB;"></i> Performance analytics</li>
+        <li class="flex items-center gap-2 opacity-70"><i data-lucide="check" style="width:14px;height:14px;color:#0047AB;"></i> Priority scheduling</li>
+       </ul><button class="cta-btn w-full py-3 rounded-sm font-heading font-700 text-sm text-white border border-white/20 hover:bg-white/10 transition-all">Select Plan</button>
+      </div>
+     </div>
+    </div>
+   </section><!-- CRYOTHERAPY CHAMBER -->
+   <section id="cryo" class="w-full py-20 md:py-28 relative overflow-hidden" style="background:#0a0e1a;"><!-- Ambient grid -->
+    <div class="absolute inset-0 pointer-events-none opacity-10">
+     <div class="grid-line grid-line-v" style="left:16.66%; background:rgba(100,180,255,0.3);"></div>
+     <div class="grid-line grid-line-v" style="left:33.33%; background:rgba(100,180,255,0.3);"></div>
+     <div class="grid-line grid-line-v" style="left:50%; background:rgba(100,180,255,0.3);"></div>
+     <div class="grid-line grid-line-v" style="left:66.66%; background:rgba(100,180,255,0.3);"></div>
+     <div class="grid-line grid-line-v" style="left:83.33%; background:rgba(100,180,255,0.3);"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+     <div class="grid md:grid-cols-2 gap-12 items-center"><!-- Text -->
+      <div>
+       <div class="flex items-center gap-4 mb-4">
+        <div class="w-8 h-px" style="background:#4DA3FF;"></div><span class="font-heading text-xs font-700 tracking-[0.3em] uppercase" style="color:#4DA3FF;">04</span>
+       </div>
+       <h2 id="cryo-title" class="font-heading font-900 text-4xl md:text-5xl tracking-tight text-white mb-6">Cryotherapy<br>
+        Chamber</h2>
+       <p class="text-base leading-relaxed text-white/50 mb-8 max-w-md">Whole-body cryotherapy at –110°C. Reduces inflammation, accelerates muscle recovery, and triggers endorphin release for elite athletes.</p>
+       <div class="grid grid-cols-2 gap-4 mb-8">
+        <div class="border border-white/10 rounded-sm p-4"><span class="font-heading font-900 text-xl text-white">–110°C</span>
+         <p class="text-xs text-white/30 mt-1">Chamber Temp</p>
+        </div>
+        <div class="border border-white/10 rounded-sm p-4"><span class="font-heading font-900 text-xl text-white">3 min</span>
+         <p class="text-xs text-white/30 mt-1">Session Duration</p>
+        </div>
+        <div class="border border-white/10 rounded-sm p-4"><span class="font-heading font-900 text-xl text-white">72%</span>
+         <p class="text-xs text-white/30 mt-1">Faster Recovery</p>
+        </div>
+        <div class="border border-white/10 rounded-sm p-4"><span class="font-heading font-900 text-xl text-white">500+</span>
+         <p class="text-xs text-white/30 mt-1">Cal Burned</p>
+        </div>
+       </div><button class="cta-btn text-white font-heading font-700 text-sm px-8 py-4 rounded-sm flex items-center gap-2" style="background:#0047AB;"> <span>Try Cryotherapy</span> <i data-lucide="snowflake" style="width:16px;height:16px;"></i> </button>
+      </div><!-- Chamber Visualization -->
+      <div class="relative flex items-center justify-center" style="min-height:400px;"><!-- Glow background -->
+       <div class="absolute rounded-full" style="width:300px;height:300px;background:radial-gradient(circle,rgba(0,71,171,0.15) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);"></div>
+       <svg width="260" height="380" viewbox="0 0 260 380" fill="none" class="relative z-10"><!-- Chamber body --> <rect x="50" y="30" width="160" height="300" rx="80" stroke="white" stroke-width="1" opacity="0.15" fill="none" /> <rect x="65" y="50" width="130" height="260" rx="65" stroke="#4DA3FF" stroke-width="0.5" opacity="0.3" fill="rgba(0,71,171,0.05)" /> <!-- Inner frost pattern --> <rect x="80" y="70" width="100" height="220" rx="50" fill="none" stroke="white" stroke-width="0.5" opacity="0.08" /> <!-- Temp indicator --> <text x="130" y="175" fill="white" font-family="Outfit,sans-serif" font-size="22" font-weight="900" text-anchor="middle" opacity="0.9">
+         –110°C
+        </text> <text x="130" y="195" fill="#4DA3FF" font-family="Outfit,sans-serif" font-size="9" font-weight="600" text-anchor="middle" letter-spacing="3" opacity="0.6">
+         ACTIVE
+        </text> <!-- Frost crystals --> <g opacity="0.3">
+         <line x1="90" y1="100" x2="95" y2="95" stroke="#4DA3FF" stroke-width="0.5" />
+         <line x1="92" y1="100" x2="92" y2="93" stroke="#4DA3FF" stroke-width="0.5" />
+         <line x1="170" y1="120" x2="165" y2="115" stroke="#4DA3FF" stroke-width="0.5" />
+         <line x1="168" y1="120" x2="168" y2="113" stroke="#4DA3FF" stroke-width="0.5" />
+         <line x1="95" y1="240" x2="100" y2="235" stroke="#4DA3FF" stroke-width="0.5" />
+         <line x1="165" y1="250" x2="160" y2="245" stroke="#4DA3FF" stroke-width="0.5" />
+        </g> <!-- Base --> <rect x="40" y="330" width="180" height="8" rx="4" fill="white" opacity="0.05" /> <rect x="60" y="335" width="140" height="4" rx="2" fill="white" opacity="0.03" />
+       </svg><!-- Vapor particles -->
+       <div class="absolute z-20" style="top:8%;left:35%;">
+        <div class="vapor-particle rounded-full" style="width:6px;height:6px;background:rgba(77,163,255,0.5);"></div>
+       </div>
+       <div class="absolute z-20" style="top:12%;left:55%;">
+        <div class="vapor-particle-slow rounded-full" style="width:8px;height:8px;background:rgba(77,163,255,0.3);animation-delay:0.5s;"></div>
+       </div>
+       <div class="absolute z-20" style="top:5%;left:45%;">
+        <div class="vapor-particle rounded-full" style="width:4px;height:4px;background:rgba(255,255,255,0.4);animation-delay:1s;"></div>
+       </div>
+       <div class="absolute z-20" style="top:15%;left:60%;">
+        <div class="vapor-particle-slow rounded-full" style="width:10px;height:10px;background:rgba(77,163,255,0.2);animation-delay:1.5s;"></div>
+       </div>
+       <div class="absolute z-20" style="top:10%;left:38%;">
+        <div class="vapor-particle rounded-full" style="width:5px;height:5px;background:rgba(255,255,255,0.3);animation-delay:2s;"></div>
+       </div>
+       <div class="absolute z-20" style="top:3%;left:50%;">
+        <div class="vapor-particle-slow rounded-full" style="width:7px;height:7px;background:rgba(77,163,255,0.25);animation-delay:0.8s;"></div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- FOOTER -->
+   <footer class="w-full border-t border-gray-100 py-10" style="background:#FFFFFF;">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+     <div class="font-heading font-900 text-sm tracking-tight"><span style="color:#0047AB;">KINESIS</span><span style="color:#2B2B2B;">PRO</span>
+     </div>
+     <p class="text-xs opacity-30">© 2024 KinesisPro Sports Therapy. All rights reserved.</p>
+     <div class="flex items-center gap-4 opacity-30"><i data-lucide="instagram" style="width:16px;height:16px;"></i> <i data-lucide="twitter" style="width:16px;height:16px;"></i> <i data-lucide="phone" style="width:16px;height:16px;"></i>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Element SDK
+    const defaultConfig = {
+      background_color: '#FFFFFF',
+      surface_color: '#F7F7F7',
+      text_color: '#2B2B2B',
+      primary_action_color: '#0047AB',
+      secondary_action_color: '#4DA3FF',
+      font_family: 'Outfit',
+      font_size: 16,
+      hero_title: 'Recover Faster,\nPerform Better',
+      hero_subtitle: 'Evidence-based sports therapy combining manual expertise with cutting-edge technology for elite recovery.',
+      cta_text: 'Book Now',
+      services_heading: 'Manual Therapy',
+      tech_heading: 'Advanced Technology',
+      packages_heading: 'Recovery Packages',
+      cryo_heading: 'Cryotherapy\nChamber'
+    };
+
+    function applyConfig(config) {
+      const c = Object.assign({}, defaultConfig, config);
+
+      // Colors
+      document.body.style.background = c.background_color;
+      document.querySelectorAll('[data-bg="main"]').forEach(el => el.style.background = c.background_color);
+
+      // Text color
+      document.getElementById('hero-title').style.color = c.text_color;
+      document.querySelectorAll('.card-hover h3').forEach(el => {
+        if (!el.closest('[style*="background:#2B2B2B"]') && !el.closest('[style*="background: rgb(43"]')) {
+          el.style.color = c.text_color;
+        }
+      });
+
+      // Primary action
+      const primaryEls = [document.getElementById('nav-cta'), document.getElementById('hero-cta')];
+      primaryEls.forEach(el => { if (el) el.style.background = c.primary_action_color; });
+
+      // Nav logo
+      const logo = document.getElementById('nav-logo');
+      if (logo) logo.style.color = c.primary_action_color;
+
+      // Section numbering
+      document.querySelectorAll('[style*="color:#0047AB"]').forEach(el => {
+        if (el.classList.contains('font-heading') && el.textContent.match(/^0[1-4]$/)) {
+          el.style.color = c.primary_action_color;
+        }
+      });
+
+      // Fonts
+      const headFont = c.font_family + ', sans-serif';
+      document.querySelectorAll('.font-heading').forEach(el => el.style.fontFamily = headFont);
+
+      // Font size
+      const base = c.font_size;
+      const heroTitle = document.getElementById('hero-title');
+      if (heroTitle) heroTitle.style.fontSize = `${base * 4.5}px`;
+      const heroSub = document.getElementById('hero-subtitle');
+      if (heroSub) heroSub.style.fontSize = `${base * 1.25}px`;
+
+      // Text content
+      const heroTitleEl = document.getElementById('hero-title');
+      if (heroTitleEl) heroTitleEl.innerHTML = c.hero_title.replace(/\n/g, '<br>');
+      const heroSubEl = document.getElementById('hero-subtitle');
+      if (heroSubEl) heroSubEl.textContent = c.hero_subtitle;
+
+      document.getElementById('nav-cta').textContent = c.cta_text;
+      document.querySelector('#hero-cta span').textContent = c.cta_text;
+
+      const st = document.getElementById('services-title');
+      if (st) st.textContent = c.services_heading;
+      const tt = document.getElementById('tech-title');
+      if (tt) tt.textContent = c.tech_heading;
+      const pt = document.getElementById('packages-title');
+      if (pt) pt.textContent = c.packages_heading;
+      const ct = document.getElementById('cryo-title');
+      if (ct) ct.innerHTML = c.cryo_heading.replace(/\n/g, '<br>');
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => applyConfig(config),
+        mapToCapabilities: (config) => {
+          const c = Object.assign({}, defaultConfig, config);
+          return {
+            recolorables: [
+              { get: () => c.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+              { get: () => c.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+              { get: () => c.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+              { get: () => c.primary_action_color, set: (v) => { config.primary_action_color = v; window.elementSdk.setConfig({ primary_action_color: v }); } },
+              { get: () => c.secondary_action_color, set: (v) => { config.secondary_action_color = v; window.elementSdk.setConfig({ secondary_action_color: v }); } }
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => c.font_family,
+              set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); }
+            },
+            fontSizeable: {
+              get: () => c.font_size,
+              set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); }
+            }
+          };
+        },
+        mapToEditPanelValues: (config) => {
+          const c = Object.assign({}, defaultConfig, config);
+          return new Map([
+            ['hero_title', c.hero_title],
+            ['hero_subtitle', c.hero_subtitle],
+            ['cta_text', c.cta_text],
+            ['services_heading', c.services_heading],
+            ['tech_heading', c.tech_heading],
+            ['packages_heading', c.packages_heading],
+            ['cryo_heading', c.cryo_heading]
+          ]);
+        }
+      });
+    }
+
+    // Init Lucide icons
+    lucide.createIcons();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9f13b64ea34846c4',t:'MTc3NzAxOTA3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
